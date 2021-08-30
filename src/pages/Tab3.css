@@ -1,0 +1,88 @@
+
+.tab-three-content {
+  position: relative;
+  background-color: #ffffff;
+  color: #fff;
+  height: 100%;
+}
+.messageInputField {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+
+  height: 8%;
+  outline: none;
+  background-color: #ffffff;
+  color: #000;
+}
+
+.messagesContainer {
+  height: 89%;
+  margin-right: 10px;
+  margin-left: 10px;
+  overflow-y: scroll;
+  padding-bottom: 10%;
+}
+.userCard {
+  background-color: #2556eb;
+  color: #fff;
+  border-radius: 4px;
+  text-align: right;
+  width: auto;
+  margin: auto 0 auto auto;
+  width: max-content;
+  max-width: 90%;
+}
+
+.botCard {
+  background-color: #f4f4f4;
+  color: #595556;
+  border-radius: 4px;
+  width: max-content;
+  max-width: 90%;
+  margin-bottom: 10px;
+}
+::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}
+.border-input {
+  border: 1px solid #f3f2c9;
+  border-top: 0px;
+  margin-top: 4vh;
+  border-right: 0px;
+  border-left: 0px;
+  margin-left: 5%;
+  width: 90%;
+  margin-bottom: 4vh;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.w-64 {
+  width: 64rem;
+}
+.btn-outer {
+  text-align: center;
+}
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px transparent gray !important;
+}
+
+.mt-full {
+  margin-top: 100%;
+}
+
+.bg-blue-111{
+  background-color: #2556eb;
+}
+.text-blue-111{
+  color: #2556eb;
+}

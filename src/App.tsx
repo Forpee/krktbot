@@ -13,7 +13,9 @@ import { ellipse, square, triangle } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
-
+import Login from './pages/Login';
+import Register from './pages/Register';
+import { useState, useEffect } from 'react'
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -29,14 +31,43 @@ import '@ionic/react/css/text-alignment.css';
 import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
+import { getCurrentUser } from './firebaseConfig'
+import './theme/variables.css'
 
-/* Theme variables */
-import './theme/variables.css';
 
-const App: React.FC = () => (
-  <IonApp>
+
+const PrivateRoute: React.FC = () => {
+  return (
     <IonReactRouter>
-      <IonTabs>
+      <IonRouterOutlet>
+        <Route path="/register">
+          <Register />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route exact path="/">
+          <Redirect to="/tab5" />
+        </Route>
+        <Route exact path="/tab1">
+          <Redirect to="/tab5" />
+        </Route>
+        <Route exact path="/tab2">
+          <Redirect to="/tab5" />
+        </Route>
+        <Route exact path="/tab3">
+          <Redirect to="/tab5" />
+        </Route>
+
+      </IonRouterOutlet>
+    </IonReactRouter>
+  )
+}
+
+const PublicRoutes: React.FC = () => {
+  return (
+    <IonReactRouter>
+    
         <IonRouterOutlet>
           <Route exact path="/tab1">
             <Tab1 />
@@ -50,24 +81,61 @@ const App: React.FC = () => (
           <Route exact path="/">
             <Redirect to="/tab1" />
           </Route>
+          <Route exact path="/login">
+            <Redirect to="/tab1" />
+          </Route>
+          <Route exact path="/register">
+            <Redirect to="/tab1" />
+          </Route>
+          <Route exact path="/tab5">
+            <Redirect to="/tab1" />
+          </Route>
         </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon icon={triangle} />
-            <IonLabel>Tab 1</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon icon={square} />
-            <IonLabel>Tab 3</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
+      
+      
     </IonReactRouter>
-  </IonApp>
-);
+  )
+}
+const App: React.FC = () => {
+  const [isLoggedin, setisLoggedin] = useState<boolean>(false);
+  useEffect(() => {
+
+
+    getCurrentUser().then((user) => {
+      if (user) {
+
+        setisLoggedin(true)
+
+      } else {
+
+        setisLoggedin(false)
+
+      }
+    })
+    if (isLoggedin === undefined) {
+      const loading = document.createElement('ion-loading');
+
+      loading.cssClass = 'my-custom-class';
+      loading.message = 'Please wait...';
+      loading.duration = 2000;
+
+      document.body.appendChild(loading);
+      loading.present();
+
+
+    }
+
+  }, [isLoggedin, setisLoggedin])
+
+
+
+  return (
+    <IonApp>
+      {isLoggedin === undefined ? <div>Loading</div> : ''}
+      {isLoggedin ? <PublicRoutes /> : <PrivateRoute />}
+    </IonApp>
+  )
+
+}
 
 export default App;

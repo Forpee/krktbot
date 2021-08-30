@@ -1,0 +1,11 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "KrktCoach",
+	"webDir": "build",
+	"bundledWebRuntime": false,
+	"server": {
+		"allowNavigation": [
+			"https://server-dialog.herokuapp.com/api/agent/text-input"
+		]
+	}
+}
